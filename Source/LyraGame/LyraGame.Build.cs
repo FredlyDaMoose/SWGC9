@@ -41,7 +41,10 @@ public class LyraGame : ModuleRules
 				"CommonLoadingScreen",
 				"Niagara",
 				"AsyncMixin",
-				"ControlFlows"
+				"ControlFlows",
+				
+				"ALS",
+				"ALSCamera"
 			}
 		);
 

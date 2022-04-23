@@ -1,0 +1,3 @@
+[submodule "Plugins/AdvancedLocomotionSystem"]
+	path = Plugins/AdvancedLocomotionSystem
+	url = https://github.com/Sixze/ALS-Refactored.git

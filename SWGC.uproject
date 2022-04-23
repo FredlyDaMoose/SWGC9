@@ -294,6 +294,11 @@
 				"Mac",
 				"Linux"
 			]
+		},
+		{
+			"Name": "ALS",
+			"Enabled": true,
+			"MarketplaceURL": "https://www.unrealengine.com/marketplace/en-US/product/advanced-locomotion-system-v1"
 		}
 	],
 	"EpicSampleNameHash": "451731683"
