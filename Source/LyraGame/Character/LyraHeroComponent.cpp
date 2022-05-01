@@ -20,6 +20,7 @@
 #include "System/LyraAssetManager.h"
 #include "PlayerMappableInputConfig.h"
 #include "Character/SwgcCharacter.h"
+#include "Utility/AlsMath.h"
 
 #if WITH_EDITOR
 #include "Misc/UObjectToken.h"
@@ -91,7 +92,7 @@ bool ULyraHeroComponent::IsPawnComponentReadyToInitialize() const
 	// If we're authority or autonomous, we need to wait for a controller with registered ownership of the player state.
 	if (Pawn->GetLocalRole() != ROLE_SimulatedProxy)
 	{
-		AController* Controller = GetController<AController>();
+		const AController* Controller = GetController<AController>();
 
 		const bool bHasControllerPairedWithPS = (Controller != nullptr) && \
 												(Controller->PlayerState != nullptr) && \
@@ -126,7 +127,7 @@ void ULyraHeroComponent::OnPawnReadyToInitialize()
 		return;
 	}
 
-	APawn* Pawn = GetPawn<APawn>();
+	const APawn* Pawn = GetPawn<APawn>();
 	if (!Pawn)
 	{
 		return;
@@ -364,7 +365,8 @@ void ULyraHeroComponent::Input_AbilityInputTagReleased(FGameplayTag InputTag)
 
 void ULyraHeroComponent::Input_Move(const FInputActionValue& InputActionValue)
 {
-	APawn* Pawn = GetPawn<APawn>();
+	//APawn* Pawn = GetPawn<APawn>();
+	ASwgcCharacter* Pawn = GetPawn<ASwgcCharacter>();
 	AController* Controller = Pawn ? Pawn->GetController() : nullptr;
 
 	// If the player has attempted to move again then cancel auto running
@@ -372,12 +374,22 @@ void ULyraHeroComponent::Input_Move(const FInputActionValue& InputActionValue)
 	{
 		LyraController->SetIsAutoRunning(false);
 	}
-	
+
+	//NOTE: changed to ALS input function. Idk if there's much of a difference.
 	if (Controller)
 	{
+		const auto Value{UAlsMath::ClampMagnitude012D(InputActionValue.Get<FVector2D>())};
+
+		const auto ForwardDirection{UAlsMath::AngleToDirectionXY(UE_REAL_TO_FLOAT(Pawn->GetViewState().Rotation.Yaw))};
+		const auto RightDirection{UAlsMath::PerpendicularCounterClockwiseXY(ForwardDirection)};
+
+		Pawn->AddMovementInput(ForwardDirection * Value.Y + RightDirection * Value.X);
+		
+		/*
 		const FVector2D Value = InputActionValue.Get<FVector2D>();
 		const FRotator MovementRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
 
+		
 		if (Value.X != 0.0f)
 		{
 			const FVector MovementDirection = MovementRotation.RotateVector(FVector::RightVector);
@@ -389,6 +401,7 @@ void ULyraHeroComponent::Input_Move(const FInputActionValue& InputActionValue)
 			const FVector MovementDirection = MovementRotation.RotateVector(FVector::ForwardVector);
 			Pawn->AddMovementInput(MovementDirection, Value.Y);
 		}
+		*/
 	}
 }
 

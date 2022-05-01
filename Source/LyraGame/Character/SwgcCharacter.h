@@ -151,7 +151,4 @@ protected:
 
 public:
 	virtual void DisplayDebug(UCanvas* Canvas, const FDebugDisplayInfo& DebugDisplay, float& Unused, float& VerticalLocation) override;
-
-	
-
 };

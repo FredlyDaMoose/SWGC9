@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "LyraInputConfig.h"
 #include "GameplayTagContainer.h"
+#include "LyraLogChannels.h"
 #include "Input/LyraMappableConfigPair.h"
 #include "LyraInputComponent.generated.h"
 

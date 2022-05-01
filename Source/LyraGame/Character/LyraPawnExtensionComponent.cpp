@@ -89,7 +89,7 @@ void ULyraPawnExtensionComponent::InitializeAbilitySystem(ULyraAbilitySystemComp
 	}
 
 	APawn* Pawn = GetPawnChecked<APawn>();
-	AActor* ExistingAvatar = InASC->GetAvatarActor();
+	const AActor* ExistingAvatar = InASC->GetAvatarActor();
 
 	UE_LOG(LogLyra, Verbose, TEXT("Setting up ASC [%s] on pawn [%s] owner [%s], existing [%s] "), *GetNameSafe(InASC), *GetNameSafe(Pawn), *GetNameSafe(InOwnerActor), *GetNameSafe(ExistingAvatar));
 
@@ -189,7 +189,7 @@ bool ULyraPawnExtensionComponent::CheckPawnReadyToInitialize()
 		return false;
 	}
 
-	APawn* Pawn = GetPawnChecked<APawn>();
+	const APawn* Pawn = GetPawnChecked<APawn>();
 
 	const bool bHasAuthority = Pawn->HasAuthority();
 	const bool bIsLocallyControlled = Pawn->IsLocallyControlled();

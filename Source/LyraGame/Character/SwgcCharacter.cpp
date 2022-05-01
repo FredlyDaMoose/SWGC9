@@ -38,10 +38,17 @@ ASwgcCharacter::ASwgcCharacter(const FObjectInitializer& ObjectInitializer)
 	MeshComp->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));  // Rotate mesh to be X forward since it is exported as Y forward.
 	MeshComp->SetCollisionProfileName(NAME_LyraCharacterCollisionProfile_Mesh);
 
+	// Pawn Extension Component
 	PawnExtComponent = CreateDefaultSubobject<ULyraPawnExtensionComponent>(TEXT("PawnExtensionComponent"));
 	PawnExtComponent->OnAbilitySystemInitialized_RegisterAndCall(FSimpleMulticastDelegate::FDelegate::CreateUObject(this, &ThisClass::OnAbilitySystemInitialized));
 	PawnExtComponent->OnAbilitySystemUninitialized_Register(FSimpleMulticastDelegate::FDelegate::CreateUObject(this, &ThisClass::OnAbilitySystemUninitialized));
-	
+
+	// Health Component
+	HealthComponent = CreateDefaultSubobject<ULyraHealthComponent>(TEXT("HealthComponent"));
+	HealthComponent->OnDeathStarted.AddDynamic(this, &ThisClass::OnDeathStarted);
+	HealthComponent->OnDeathFinished.AddDynamic(this, &ThisClass::OnDeathFinished);
+
+	// ALS Camera
 	AlsCamera = CreateDefaultSubobject<UAlsCameraComponent>(TEXT("AlsCamera"));
 	AlsCamera->SetupAttachment(GetMesh());
 	AlsCamera->SetRelativeRotation_Direct({0.0f, 90.0f, 0.0f});
@@ -117,7 +124,7 @@ void ASwgcCharacter::NotifyControllerChanged()
 	// Update our team ID based on the controller
 	if (HasAuthority() && (Controller != nullptr))
 	{
-		if (ILyraTeamAgentInterface* ControllerWithTeam = Cast<ILyraTeamAgentInterface>(Controller))
+		if (const ILyraTeamAgentInterface* ControllerWithTeam = Cast<ILyraTeamAgentInterface>(Controller))
 		{
 			MyTeamID = ControllerWithTeam->GetGenericTeamId();
 			ConditionalBroadcastTeamChanged(this, OldTeamId, MyTeamID);
@@ -243,7 +250,7 @@ void ASwgcCharacter::InitializeGameplayTags()
 			}
 		}
 
-		UAlsCharacterMovementComponent* AlsMoveComp = CastChecked<UAlsCharacterMovementComponent>(GetCharacterMovement());
+		const UAlsCharacterMovementComponent* AlsMoveComp = CastChecked<UAlsCharacterMovementComponent>(GetCharacterMovement());
 		SetMovementModeTag(AlsMoveComp->MovementMode, AlsMoveComp->CustomMovementMode, true);
 	}
 }
@@ -336,7 +343,7 @@ void ASwgcCharacter::UninitAndDestroy()
 	}
 
 	// Uninitialize the ASC if we're still the avatar actor (otherwise another pawn already did it when they became the avatar actor)
-	if (ULyraAbilitySystemComponent* LyraASC = GetLyraAbilitySystemComponent())
+	if (const ULyraAbilitySystemComponent* LyraASC = GetLyraAbilitySystemComponent())
 	{
 		if (LyraASC->GetAvatarActor() == this)
 		{

@@ -51,7 +51,7 @@ void ULyraHealthComponent::OnUnregister()
 
 void ULyraHealthComponent::InitializeWithAbilitySystem(ULyraAbilitySystemComponent* InASC)
 {
-	AActor* Owner = GetOwner();
+	const AActor* Owner = GetOwner();
 	check(Owner);
 
 	if (AbilitySystemComponent)
