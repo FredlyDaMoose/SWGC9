@@ -9,7 +9,7 @@
 
 class ULyraAbilitySystemComponent;
 class ALyraPlayerController;
-class ALyraCharacter;
+class ASwgcCharacter;
 class ULyraHeroComponent;
 class ULyraCameraMode;
 class ULyraAbilityCost;
@@ -98,7 +98,7 @@ public:
 	AController* GetControllerFromActorInfo() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Lyra|Ability")
-	ALyraCharacter* GetLyraCharacterFromActorInfo() const;
+	ASwgcCharacter* GetSwgcCharacterFromActorInfo() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Lyra|Ability")
 	ULyraHeroComponent* GetHeroComponentFromActorInfo() const;

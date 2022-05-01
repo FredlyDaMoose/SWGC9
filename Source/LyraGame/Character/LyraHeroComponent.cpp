@@ -9,7 +9,6 @@
 #include "Player/LyraPlayerState.h"
 #include "Character/LyraPawnExtensionComponent.h"
 #include "Character/LyraPawnData.h"
-#include "Character/LyraCharacter.h"
 #include "AbilitySystem/LyraAbilitySystemComponent.h"
 #include "Input/LyraInputConfig.h"
 #include "Input/LyraInputComponent.h"
@@ -20,6 +19,7 @@
 #include "Settings/LyraSettingsLocal.h"
 #include "System/LyraAssetManager.h"
 #include "PlayerMappableInputConfig.h"
+#include "Character/SwgcCharacter.h"
 
 #if WITH_EDITOR
 #include "Misc/UObjectToken.h"
@@ -441,7 +441,7 @@ void ULyraHeroComponent::Input_LookStick(const FInputActionValue& InputActionVal
 
 void ULyraHeroComponent::Input_Crouch(const FInputActionValue& InputActionValue)
 {
-	if (ALyraCharacter* Character = GetPawn<ALyraCharacter>())
+	if (ASwgcCharacter* Character = GetPawn<ASwgcCharacter>())
 	{
 		Character->ToggleCrouch();
 	}

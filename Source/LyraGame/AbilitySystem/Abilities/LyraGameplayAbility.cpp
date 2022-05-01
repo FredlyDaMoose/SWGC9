@@ -4,7 +4,7 @@
 #include "LyraLogChannels.h"
 #include "AbilitySystem/LyraAbilitySystemComponent.h"
 #include "Player/LyraPlayerController.h"
-#include "Character/LyraCharacter.h"
+#include "Character/SwgcCharacter.h"
 #include "LyraGameplayTags.h"
 #include "LyraAbilityCost.h"
 #include "Character/LyraHeroComponent.h"
@@ -73,9 +73,9 @@ AController* ULyraGameplayAbility::GetControllerFromActorInfo() const
 	return nullptr;
 }
 
-ALyraCharacter* ULyraGameplayAbility::GetLyraCharacterFromActorInfo() const
+ASwgcCharacter* ULyraGameplayAbility::GetSwgcCharacterFromActorInfo() const
 {
-	return (CurrentActorInfo ? Cast<ALyraCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
+	return (CurrentActorInfo ? Cast<ASwgcCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
 }
 
 ULyraHeroComponent* ULyraGameplayAbility::GetHeroComponentFromActorInfo() const

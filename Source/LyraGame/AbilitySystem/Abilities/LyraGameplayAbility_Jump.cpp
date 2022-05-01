@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "LyraGameplayAbility_Jump.h"
-#include "Character/LyraCharacter.h"
+#include "Character/SwgcCharacter.h"
 
 
 ULyraGameplayAbility_Jump::ULyraGameplayAbility_Jump(const FObjectInitializer& ObjectInitializer)
@@ -18,7 +18,7 @@ bool ULyraGameplayAbility_Jump::CanActivateAbility(const FGameplayAbilitySpecHan
 		return false;
 	}
 
-	const ALyraCharacter* LyraCharacter = Cast<ALyraCharacter>(ActorInfo->AvatarActor.Get());
+	const ASwgcCharacter* LyraCharacter = Cast<ASwgcCharacter>(ActorInfo->AvatarActor.Get());
 	if (!LyraCharacter || !LyraCharacter->CanJump())
 	{
 		return false;
@@ -42,7 +42,7 @@ void ULyraGameplayAbility_Jump::EndAbility(const FGameplayAbilitySpecHandle Hand
 
 void ULyraGameplayAbility_Jump::CharacterJumpStart()
 {
-	if (ALyraCharacter* LyraCharacter = GetLyraCharacterFromActorInfo())
+	if (ASwgcCharacter* LyraCharacter = GetSwgcCharacterFromActorInfo())
 	{
 		if (LyraCharacter->IsLocallyControlled() && !LyraCharacter->bPressedJump)
 		{
@@ -54,7 +54,7 @@ void ULyraGameplayAbility_Jump::CharacterJumpStart()
 
 void ULyraGameplayAbility_Jump::CharacterJumpStop()
 {
-	if (ALyraCharacter* LyraCharacter = GetLyraCharacterFromActorInfo())
+	if (ASwgcCharacter* LyraCharacter = GetSwgcCharacterFromActorInfo())
 	{
 		if (LyraCharacter->IsLocallyControlled() && LyraCharacter->bPressedJump)
 		{

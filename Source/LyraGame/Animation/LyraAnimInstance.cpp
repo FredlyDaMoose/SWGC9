@@ -3,7 +3,7 @@
 #include "LyraAnimInstance.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemGlobals.h"
-#include "Character/LyraCharacter.h"
+#include "Character/SwgcCharacter.h"
 #include "Character/LyraCharacterMovementComponent.h"
 
 
@@ -47,7 +47,7 @@ void ULyraAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
-	const ALyraCharacter* Character = Cast<ALyraCharacter>(GetOwningActor());
+	const ASwgcCharacter* Character = Cast<ASwgcCharacter>(GetOwningActor());
 	if (!Character)
 	{
 		return;

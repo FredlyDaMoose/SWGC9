@@ -8,7 +8,7 @@
 #include "Player/LyraPlayerController.h"
 #include "Player/LyraPlayerBotController.h"
 #include "Player/LyraPlayerState.h"
-#include "Character/LyraCharacter.h"
+#include "Character/SwgcCharacter.h"
 #include "UI/LyraHUD.h"
 #include "Character/LyraPawnExtensionComponent.h"
 #include "Character/LyraPawnData.h"
@@ -28,7 +28,7 @@ ALyraGameMode::ALyraGameMode(const FObjectInitializer& ObjectInitializer)
 	PlayerControllerClass = ALyraPlayerController::StaticClass();
 	ReplaySpectatorPlayerControllerClass = ALyraReplayPlayerController::StaticClass();
 	PlayerStateClass = ALyraPlayerState::StaticClass();
-	DefaultPawnClass = ALyraCharacter::StaticClass();
+	DefaultPawnClass = ASwgcCharacter::StaticClass();
 	HUDClass = ALyraHUD::StaticClass();
 }
 

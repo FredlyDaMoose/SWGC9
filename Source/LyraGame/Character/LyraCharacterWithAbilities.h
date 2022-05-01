@@ -3,13 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Character/LyraCharacter.h"
+#include "SwgcCharacter.h"
+#include "Character/SwgcCharacter.h"
 #include "LyraCharacterWithAbilities.generated.h"
 
 // ALyraCharacter typically gets the ability system component from the possessing player state
 // This represents a character with a self-contained ability system component.
 UCLASS(Blueprintable)
-class ALyraCharacterWithAbilities : public ALyraCharacter
+class ALyraCharacterWithAbilities : public ASwgcCharacter
 {
 	GENERATED_BODY()
 

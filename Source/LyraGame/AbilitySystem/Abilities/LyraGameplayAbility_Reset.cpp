@@ -7,7 +7,7 @@
 #include "LyraGameplayTags.h"
 #include "AbilitySystem/LyraAbilitySystemComponent.h"
 #include "GameFramework/GameplayMessageSubsystem.h"
-#include "Character/LyraCharacter.h"
+#include "Character/SwgcCharacter.h"
 
 ULyraGameplayAbility_Reset::ULyraGameplayAbility_Reset(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -50,7 +50,7 @@ void ULyraGameplayAbility_Reset::ActivateAbility(const FGameplayAbilitySpecHandl
 	}
 
 	// Execute the reset from the character
-	if (ALyraCharacter* LyraChar = Cast<ALyraCharacter>(CurrentActorInfo->AvatarActor.Get()))
+	if (ASwgcCharacter* LyraChar = Cast<ASwgcCharacter>(CurrentActorInfo->AvatarActor.Get()))
 	{
 		LyraChar->Reset();
 	}
