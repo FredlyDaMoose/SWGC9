@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "LyraGameplayAbility_Jump.h"
+
+#include "LyraLogChannels.h"
 #include "Character/SwgcCharacter.h"
 
 
@@ -29,6 +31,7 @@ bool ULyraGameplayAbility_Jump::CanActivateAbility(const FGameplayAbilitySpecHan
 		return false;
 	}
 
+	UE_LOG(LogLyra, Error, TEXT("JUMP"));
 	return true;
 }
 

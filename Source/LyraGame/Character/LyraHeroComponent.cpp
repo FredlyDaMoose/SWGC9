@@ -227,7 +227,6 @@ void ULyraHeroComponent::InitializePlayerInput(UInputComponent* PlayerInputCompo
 					LocalSettings->OnInputConfigActivated.AddUObject(this, &ULyraHeroComponent::OnInputConfigActivated);
 					LocalSettings->OnInputConfigDeactivated.AddUObject(this, &ULyraHeroComponent::OnInputConfigDeactivated);
 				}
-
 				TArray<uint32> BindHandles;
 				LyraIC->BindAbilityActions(InputConfig, this, &ThisClass::Input_AbilityInputTagPressed, &ThisClass::Input_AbilityInputTagReleased, /*out*/ BindHandles);
 
