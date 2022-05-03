@@ -28,8 +28,8 @@
 
 namespace LyraHero
 {
-	static const float LookYawRate = 300.0f;
-	static const float LookPitchRate = 165.0f;
+	static constexpr float LookYawRate = 300.0f;
+	static constexpr float LookPitchRate = 165.0f;
 };
 
 const FName ULyraHeroComponent::NAME_BindInputsNow("BindInputsNow");
@@ -252,7 +252,7 @@ void ULyraHeroComponent::OnInputConfigActivated(const FLoadedMappableConfigPair&
 {
 	if (ALyraPlayerController* LyraPC = GetController<ALyraPlayerController>())
 	{
-		if (APawn* Pawn = GetPawn<APawn>())
+		if (const APawn* Pawn = GetPawn<APawn>())
 		{
 			if (ULyraInputComponent* LyraIC = Cast<ULyraInputComponent>(Pawn->InputComponent))
 			{
@@ -272,7 +272,7 @@ void ULyraHeroComponent::OnInputConfigDeactivated(const FLoadedMappableConfigPai
 {
 	if (ALyraPlayerController* LyraPC = GetController<ALyraPlayerController>())
 	{
-		if (APawn* Pawn = GetPawn<APawn>())
+		if (const APawn* Pawn = GetPawn<APawn>())
 		{
 			if (ULyraInputComponent* LyraIC = Cast<ULyraInputComponent>(Pawn->InputComponent))
 			{
@@ -290,8 +290,6 @@ void ULyraHeroComponent::OnInputConfigDeactivated(const FLoadedMappableConfigPai
 
 void ULyraHeroComponent::AddAdditionalInputConfig(const ULyraInputConfig* InputConfig)
 {
-	TArray<uint32> BindHandles;
-
 	const APawn* Pawn = GetPawn<APawn>();
 	if (!Pawn)
 	{
@@ -307,11 +305,12 @@ void ULyraHeroComponent::AddAdditionalInputConfig(const ULyraInputConfig* InputC
 	const ULocalPlayer* LP = PC->GetLocalPlayer();
 	check(LP);
 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = LP->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	const UEnhancedInputLocalPlayerSubsystem* Subsystem = LP->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 	check(Subsystem);
 
 	if (const ULyraPawnExtensionComponent* PawnExtComp = ULyraPawnExtensionComponent::FindPawnExtensionComponent(Pawn))
 	{
+		TArray<uint32> BindHandles;
 		LyraIC->BindAbilityActions(InputConfig, this, &ThisClass::Input_AbilityInputTagPressed, &ThisClass::Input_AbilityInputTagReleased, /*out*/ BindHandles);
 	}
 }
@@ -461,7 +460,7 @@ void ULyraHeroComponent::Input_Crouch(const FInputActionValue& InputActionValue)
 
 void ULyraHeroComponent::Input_AutoRun(const FInputActionValue& InputActionValue)
 {
-	if (APawn* Pawn = GetPawn<APawn>())
+	if (const APawn* Pawn = GetPawn<APawn>())
 	{
 		if (ALyraPlayerController* Controller = Cast<ALyraPlayerController>(Pawn->GetController()))
 		{
@@ -484,7 +483,7 @@ TSubclassOf<ULyraCameraMode> ULyraHeroComponent::DetermineCameraMode() const
 		return nullptr;
 	}
 
-	if (ULyraPawnExtensionComponent* PawnExtComp = ULyraPawnExtensionComponent::FindPawnExtensionComponent(Pawn))
+	if (const ULyraPawnExtensionComponent* PawnExtComp = ULyraPawnExtensionComponent::FindPawnExtensionComponent(Pawn))
 	{
 		if (const ULyraPawnData* PawnData = PawnExtComp->GetPawnData<ULyraPawnData>())
 		{

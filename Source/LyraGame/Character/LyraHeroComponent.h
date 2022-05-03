@@ -38,7 +38,7 @@ public:
 	void ClearAbilityCameraMode(const FGameplayAbilitySpecHandle& OwningSpecHandle);
 
 	void AddAdditionalInputConfig(const ULyraInputConfig* InputConfig);
-	void RemoveAdditionalInputConfig(const ULyraInputConfig* InputConfig);
+	static void RemoveAdditionalInputConfig(const ULyraInputConfig* InputConfig);
 
 	/** True if this has completed OnPawnReadyToInitialize so is prepared for late-added features */
 	bool HasPawnInitialized() const;
