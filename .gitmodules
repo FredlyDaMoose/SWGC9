@@ -1,3 +1,6 @@
 [submodule "Plugins/AdvancedLocomotionSystem"]
 	path = Plugins/AdvancedLocomotionSystem
 	url = https://github.com/Sixze/ALS-Refactored.git
+[submodule "Plugins/StarWarsBattlefront2"]
+	path = Plugins/StarWarsBattlefront2
+	url = https://github.com/FredlyDaMoose/SWBF_2.git
