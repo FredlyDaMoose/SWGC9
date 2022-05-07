@@ -102,6 +102,9 @@ void ULyraQuickBarComponent::EquipItemInSlot()
 					{
 						EquippedItem->SetInstigator(SlotItem);
 					}
+				}else
+				{
+					UE_LOG(LogTemp, Error, TEXT("FFS"));
 				}
 			}
 		}
