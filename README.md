@@ -21,10 +21,15 @@ convention for the engine, and today's standards are a culmination of years of p
 I won't get too into Unreal's class hierarchy, but the basics are
 
 UObject - The base Unreal object class. Cannot be directly placed in a scene as it doesn't have location information. The "U" before its name and other UObject class decendents names signifies its UObject inheritance. This letter is dropped from instance names. While not technically the true base class (It inherits from UObjectBaseUtility which inherits from UObjectBase), it is the lowest level class that's not considered "low level" and is reguluarly used by developers.
+
 AActor - A UObject that can be placed/spawned into a scene. The "A" before its name and other AActors replaces the "U" and signifies its AActor inheritance.
+
 APawn - An AActor that can be controlled/possessed by players or AI.
+
 ACharacter - An APawn that has mesh, collision, and built-in movement logic.
+
 AAlsCharacter - ALS's expansion of ACharacter that contains all of its advanced movement and basic logic.
+
 ASwgcCharacter - My expansion of AAlsCharacter that contains game-specific character logic that acts as the main bridge between the ALS plugin and the rest of the game's framework.
 
 
