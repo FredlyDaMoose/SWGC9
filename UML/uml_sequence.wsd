@@ -1,0 +1,11 @@
+@startuml SequenceDiagram
+actor       Player       as Foo
+participant LyraPlayerController as Foo1
+participant AbilitySystemComponent as Foo2
+participant "Example Ability" as Foo3
+
+Foo -> Foo1 : PostProcessInput()
+Foo1 -> Foo2 : ProcessAbilityInput()
+Foo2 -> Foo3 : TryActivateAbility()
+
+@enduml

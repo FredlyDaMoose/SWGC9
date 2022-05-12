@@ -1,0 +1,13 @@
+@startuml
+
+start
+:Recieve Player Input;
+if(Is AbilitySystemComponent Valid?) then (Not valid)
+elseif(Do we have an ability that has that input tag) then (No)
+elseif(Can we activate that ability?) then (No)
+else (Yes)
+:Activate ability;
+endif
+
+stop
+@enduml
