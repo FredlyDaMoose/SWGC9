@@ -28,7 +28,7 @@ public class ShooterCoreRuntime : ModuleRules
 				"Core",
 				"LyraGame",
 				"ModularGameplay",
-				"CommonGame",
+				"CommonGame"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
